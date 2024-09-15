@@ -8,13 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Slack
+      - name: Detect Wiki Changes
         run: |
-          curl -X POST -H 'Content-type: application/json' \
-            --data "{\"text\": \"Wiki ${ACTION}: ${TITLE}\n${URL}\"}" \
-            ${WEBHOOK_URL}
+          echo "{\"text\": \"Wiki ${ACTION}: ${TITLE}\n${URL}\"}" 
         env:
           ACTION: ${{ github.event.pages[0].action }}
           TITLE: ${{ github.event.pages[0].title }}
           URL: ${{ github.event.pages[0].html_url }}
-          WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
