@@ -1,0 +1,21 @@
+name: Detect Wiki Changes
+
+on:
+  push:
+    branches:
+      - 'wiki/*'
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Wiki
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref }}
+
+    - name: List changed files
+      run: |
+        git fetch origin +refs/heads/wiki/*:refs/remotes/origin/wiki/*
+        git diff --name-only origin/wiki/${{ github.event.before }} origin/wiki/${{ github.sha }}
