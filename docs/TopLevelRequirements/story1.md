@@ -19,8 +19,4 @@
 # 概要設計
 
 # 要件リスト
-- 
-# 概要設計
-
-# 要件リスト
-- 
+- [点数採点機能](https://github.com/nashells/TestActions/blob/main/docs/ArchtectureDriver/scoring.md)
