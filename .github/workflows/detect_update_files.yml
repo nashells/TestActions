@@ -8,8 +8,6 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name check out
-              uses: actions/checkout@v4
             - name: chenge files
               id: changed-files
               uses: tj-actions/changed-files@v45
