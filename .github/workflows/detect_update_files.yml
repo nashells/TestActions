@@ -1,8 +1,5 @@
 name: Detect Update Files
 
-permissions:
-    contents: read
-
 on:
     push:
 
@@ -11,8 +8,9 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - uses: GitHubSecurityLab/actions-permissions/monitor@v1
             - name: get diff
               run: |
-                  for file in $(git diff ${{ github.event.before }}..${{ github.event.after }} --name-only --diff-filter=A '*.md' ); do
-                      echo $file
-                  done
+                for file in $(git diff ${{ github.event.before }}..${{ github.event.after }} --name-only --diff-filter=A '*.md' ); do
+                    echo $file
+                done
