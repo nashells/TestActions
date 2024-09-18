@@ -22,5 +22,6 @@ jobs:
               run: |
                 for file in ${ALL_CHANGED_FILES}; do
                   echo "Changed file: ${file}"
+                  ls -FA
                   python script/listup_link.py ${file}
                 done
