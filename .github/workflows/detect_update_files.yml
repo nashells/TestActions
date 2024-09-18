@@ -9,6 +9,9 @@ jobs:
 
         steps:
             - uses: actions/checkout@v4
+            - uses: actions//setup-python@v5
+              with:
+                python-version: '3.10'
 
             - name: chenge files
               id: changed-files
@@ -19,4 +22,5 @@ jobs:
               run: |
                 for file in ${ALL_CHANGED_FILES}; do
                   echo "Changed file: ${file}"
+                  python script/listup_link.py ${file}
                 done
