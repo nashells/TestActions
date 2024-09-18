@@ -8,9 +8,15 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v4
-            - name: get diff
+            - name check out
+              uses: actions/checkout@v4
+            - name: chenge files
+              id: changed-files
+              uses: tj-actions/changed-files@v45
+            - name: List all changed files
+              env:
+                ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
               run: |
-                for file in $(git diff ${{ github.event.before }}..${{ github.event.after }} --name-only --diff-filter=A '*.md' ); do
-                    echo $file
+                for file in ${ALL_CHANGED_FILES}; do
+                  echo "Changed file: ${file}"
                 done
