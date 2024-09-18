@@ -15,7 +15,7 @@ with open(file_name, "r") as f:
     lines = f.readlines()
 
     # リンクを抽出する
-    pattern = r"\[.*?\]\((.*?)\)"
+    pattern = re.compile(r"\[.*?\]\((.*?)\)")
     for line in lines:
         match = pattern.search(line)
         if match:
