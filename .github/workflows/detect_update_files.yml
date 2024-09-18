@@ -1,0 +1,15 @@
+name: Detect Update Files
+
+on:
+    push:
+
+jobs:
+    notify:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: get diff
+              run: |
+                  for file in $(git diff ${{ github.event.before }}..${{ github.event.after --diff-filter=A '*.md' }} --name-only); do
+                      echo $file
+                  done
