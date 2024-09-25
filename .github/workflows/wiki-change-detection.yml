@@ -14,3 +14,9 @@ jobs:
           default_flag=false
           echo $check_flag
           echo $default_flag
+
+          if "$check_flag"; then
+            echo "check_flag is true"
+          else
+            echo "check_flag is false"
+          fi
