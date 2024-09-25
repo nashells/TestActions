@@ -12,7 +12,7 @@ jobs:
         run: |
           check_flag=true
           default_flag=false
-          commit_flag = false
+          commit_flag=false
           echo $check_flag
           echo $default_flag
 
