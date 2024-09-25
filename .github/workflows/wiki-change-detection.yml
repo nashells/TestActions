@@ -1,17 +1,13 @@
 name: Wiki
 
 on:
-  gollum
+  workflow_dispatch:
 
 jobs:
   notify:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Detect Wiki Changes
+      - name: Always succeed
         run: |
-          echo "{\"text\": \"Wiki ${ACTION}: ${TITLE}\n${URL}\"}" 
-        env:
-          ACTION: ${{ github.event.pages[0].action }}
-          TITLE: ${{ github.event.pages[0].title }}
-          URL: ${{ github.event.pages[0].html_url }}
+          true
