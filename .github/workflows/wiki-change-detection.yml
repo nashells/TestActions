@@ -11,3 +11,6 @@ jobs:
       - name: Always succeed
         run: |
           check_flag=true
+          default_flag=false
+          echo $check_flag
+          echo $default_flag
