@@ -1,0 +1,31 @@
+name: test pull request
+
+permissions:
+    pull-requests: write
+    contents: write
+
+on:
+    workflow_dispatch:
+
+jobs:
+    create:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: create file and push
+              env:
+                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                git config --local user.email "action@github.com"
+                git config --local user.name "GitHub Action"
+
+                working_branch="test_$(date +%Y%m%d%H%M%S)"
+                git checkout -b $working_branch
+                file_name="${working_branch}.txt"
+                echo "This is a test file" > tmp/$file_name
+                git add tmp/$file_name
+                git commit -m "Create $file_name"
+                git push origin $working_branch
+                gh pr create --title "Create $file_name" --body "Create $file_name" --base main --head $working_branch
