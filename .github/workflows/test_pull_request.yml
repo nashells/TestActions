@@ -24,7 +24,7 @@ jobs:
                 working_branch="test_$(date +%Y%m%d%H%M%S)"
                 git checkout -b $working_branch
                 file_name="${working_branch}.txt"
-                echo "This is a test file" > tmp/$file_name
+                echo "This is a test file" >> tmp/$file_name
                 git add tmp/$file_name
                 git commit -m "Create $file_name"
                 git push origin $working_branch
