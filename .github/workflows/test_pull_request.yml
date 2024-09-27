@@ -30,4 +30,4 @@ jobs:
                 git add tmp/$file_name
                 git commit -m "Create $file_name"
                 git push origin $working_branch
-                gh pr create --title "Create $file_name" --body "Create $file_name" --base main --head $working_branch
+                
