@@ -13,7 +13,9 @@ jobs:
                 files="docs/ArchitectureDocument/RMS.md"
                 echo "dosc/ArchitectureDocument/RMS.md" >> ${files}
                 echo "doc/ArchitectureDocument/RMS.md" >> ${files}
+                echo ${files}          
                 for file in ${files}; do
+                    echo "File: ${file}"
                     if [[ "${file}" =~ "docs/" ]]; then
                         echo "Matched"
                     elif [[ "${file}" =~ "docs/ArchitectureDocument/" ]]; then
