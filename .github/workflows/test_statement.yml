@@ -11,9 +11,9 @@ jobs:
             - name: test statement
               run: |
                 files="docs/ArchitectureDocument/RMS.md"
-                files+="\n"
+                files+=" "
                 files+="dosc/ArchitectureDocument/RMS.md"
-                files+="\n"
+                files+=" "
                 files+="doc/ArchitectureDocument/RMS.md"
                 echo ${files}          
                 for file in ${files}; do
