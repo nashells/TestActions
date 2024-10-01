@@ -11,8 +11,10 @@ jobs:
             - name: test statement
               run: |
                 files="docs/ArchitectureDocument/RMS.md"
-                echo "dosc/ArchitectureDocument/RMS.md" >> ${files}
-                echo "doc/ArchitectureDocument/RMS.md" >> ${files}
+                $files+="\n"
+                $files+="dosc/ArchitectureDocument/RMS.md"
+                $files+="\n"
+                $files+="doc/ArchitectureDocument/RMS.md"
                 echo ${files}          
                 for file in ${files}; do
                     echo "File: ${file}"
