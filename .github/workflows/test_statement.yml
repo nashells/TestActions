@@ -1,0 +1,17 @@
+name: Test Statement
+
+on:
+    workflow_dispatch:
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: test statement
+              run: |
+                if [[ "docs/ArchitectureDocument/RMS.md" =~ "docs/ArchitectureDocument/" ]]; then
+                    echo "Matched"
+                else
+                    echo "Not Matched"
+                fi
