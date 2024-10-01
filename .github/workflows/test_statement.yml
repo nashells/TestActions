@@ -10,8 +10,10 @@ jobs:
         steps:
             - name: test statement
               run: |
-                if [[ "docs/ArchitectureDocument/RMS.md" =~ "docs/ArchitectureDocument/" ]]; then
+                if [[ "docs/ArchitectureDocument/RMS.md" =~ "docs/" ]]; then
                     echo "Matched"
+                elif [[ "docs/ArchitectureDocument/RMS.md" =~ "docs/ArchitectureDocument/" ]]; then
+                    echo "Sub Matched"
                 else
                     echo "Not Matched"
                 fi
