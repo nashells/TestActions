@@ -1,0 +1,38 @@
+name: Update wiki pages
+
+on:
+    workflow_dispatch:
+
+jobs:
+  update-wiki:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Check out main repo
+        uses: actions/checkout@v4
+
+      - name: Check out wiki repo
+        uses: actions/checkout@v4
+        with:
+          repository: "${{ github.repository }}.wiki"
+          path: .wiki
+
+      - name: Update wiki pages
+        run: echo -e "# Hello\n\n$(date)" > .wiki/hello.md
+
+      - name: Stage and count changes
+        working-directory: .wiki
+        id: staging
+        run: |
+          git add .
+          echo "NUM_OF_STAGED=$(git diff --staged --name-only | wc -l)" >> $GITHUB_OUTPUT          
+
+      - name: Commit wiki pages
+        working-directory: .wiki
+        if: steps.staging.outputs.NUM_OF_STAGED > 0
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git commit -m "${GITHUB_WORKFLOW}"
+          git push 
