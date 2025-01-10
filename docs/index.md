@@ -1,4 +1,25 @@
-# GitHub Pagesサイトテスト用
+---
+# https://vitepress.dev/reference/default-theme-home-page
+layout: home
 
-- [トップレベル要求1](./TopLevelRequirements/story1.md)
-- [トップレベル要求2](./TopLevelRequirements/story2.md)
+hero:
+  name: "Test for GitHub Pages"
+  text: "A VitePress Site"
+  tagline: My great project tagline
+  actions:
+    - theme: brand
+      text: Markdown Examples
+      link: /markdown-examples
+    - theme: alt
+      text: API Examples
+      link: /api-examples
+
+features:
+  - title: Feature A
+    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Feature B
+    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Feature C
+    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+---
+
