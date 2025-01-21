@@ -6,9 +6,13 @@
     "dockerfile": "Dockerfile"
   },
   "remoteUser": "node",
-  "extensions": [
-    "ms-azuretools.vscode-docker",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
-  ]
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
 }
