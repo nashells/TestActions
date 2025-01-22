@@ -1,8 +1,18 @@
 // See https://containers.dev/implementors/json_reference/ for configuration reference
 {
-	"name": "Untitled Node.js project",
-	"build": {
-		"dockerfile": "Dockerfile"
-	},
-  "remoteUser": "node"
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+  "name": "Untitled Node.js project",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "node",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
 }
