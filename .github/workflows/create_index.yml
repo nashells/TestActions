@@ -13,6 +13,10 @@ jobs:
     create-index:
         runs-on: ubuntu-latest
         timeout-minutes: 3
+
+        permissions:
+            contents: write
+            repository-projects: read
         
         steps:
             - name: Check out main repo
@@ -30,6 +34,7 @@ jobs:
             - name: Create index file
               env: 
                 CHANGED_FILES: ${{ steps.chenged-files.outputs.all_changed_files}}
+                GH_TOKEN: ${{ github.token }}
               run: |
                 git config --global user.name "github-actions[bot]"
                 git config --global user.email "github-actions[bot]@users.noreply.github.com"
