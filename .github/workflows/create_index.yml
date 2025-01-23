@@ -1,0 +1,53 @@
+name: Create index file
+
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - main
+        paths:
+            - docs/ArchitectureDriver/*.md
+            - docs/TopLevelRequirements/*.md
+
+jobs:
+    create-index:
+        runs-on: ubuntu-latest
+        timeout-minutes: 3
+        
+        steps:
+            - name: Check out main repo
+              uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                python-version: '3.x'
+
+            - name: Create index file
+              run: |
+                CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+                if echo "$CHANGED_FILES" | grep -q '^docs/ArchitectureDriver/'; then
+                  echo "Creating AD_index.md"
+                  echo "# Architecture Driver Index" > docs/AD_index.md
+                  for file in docs/ArchitectureDriver/*.md; do
+                    echo "- [$(basename $file)]($file)" >> docs/AD_index.md
+                  done
+                fi
+                if echo "$CHANGED_FILES" | grep -q '^docs/TopLevelRequirements/'; then
+                  echo "Creating TLR_index.md"
+                  echo "# Top Level Requirements Index" > docs/TLR_index.md
+                  for file in docs/TopLevelRequirements/*.md; do
+                    echo "- [$(basename $file)]($file)" >> docs/TLR_index.md
+                  done
+
+            - name: Commit and push changes
+              run: |
+                git config --global user.name "github-actions[bot]"
+                git config --global user.email "github-actions[bot]@users.noreply.github.com"
+                git add docs/AD_index.md docs/TLR_index.md || true
+                git commit -m "Update index files" || true
+                git push origin main
+
+
+
+
