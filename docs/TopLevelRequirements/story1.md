@@ -21,3 +21,4 @@
 # 要件リスト
 - [イベントの内容を表示するためのディスプレイ](https://github.com/nashells/TestActions/blob/main/docs/ArchtectureDriver/display.md)
 - [点数採点機能](https://github.com/nashells/TestActions/blob/main/docs/ArchtectureDriver/scoring.md)
+
