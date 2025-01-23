@@ -31,12 +31,15 @@ jobs:
               env: 
                 CHANGED_FILES: ${{ steps.chenged-files.outputs.all_changed_files}}
               run: |
+                git config --global user.name "github-actions[bot]"
+                git config --global user.email "github-actions[bot]@users.noreply.github.com"
                 if echo "${CHANGED_FILES}" | grep -q '^docs/ArchitectureDriver/'; then
                   echo "Creating AD_index.md"
                   echo "# Architecture Driver Index" > docs/AD_index.md
                   for file in docs/ArchitectureDriver/*.md; do
                     echo "- [$(basename $file)]($file)" >> docs/AD_index.md
                   done
+                  git add docs/AD_index.md
                 fi
                 if echo "${CHANGED_FILES}" | grep -q '^docs/TopLevelRequirements/'; then
                   echo "Creating TLR_index.md"
@@ -44,13 +47,8 @@ jobs:
                   for file in docs/TopLevelRequirements/*.md; do
                     echo "- [$(basename $file)]($file)" >> docs/TLR_index.md
                   done
+                  git add docs/TLR_index.md
                 fi
-
-            - name: Commit and push changes
-              run: |
-                git config --global user.name "github-actions[bot]"
-                git config --global user.email "github-actions[bot]@users.noreply.github.com"
-                git add docs/AD_index.md docs/TLR_index.md || true
                 git commit -m "Update index files" || true
                 git push origin main
 
