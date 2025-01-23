@@ -25,7 +25,11 @@ jobs:
 
             - name: Create index file
               run: |
-                CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+                if git rev-parse HEAD^ >/dev/null 2>&1; then
+                  CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+                else
+                  CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+                fi
                 if echo "$CHANGED_FILES" | grep -q '^docs/ArchitectureDriver/'; then
                   echo "Creating AD_index.md"
                   echo "# Architecture Driver Index" > docs/AD_index.md
