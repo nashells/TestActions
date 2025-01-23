@@ -22,22 +22,23 @@ jobs:
               uses: actions/setup-python@v2
               with:
                 python-version: '3.x'
+            
+            - name: Changed files
+              id: chenged-files
+              uses: tj-actions/changed-files@v45
 
             - name: Create index file
+              env: 
+                CHANGED_FILES: ${{ steps.chenged-files.outputs.all_changed_files}}
               run: |
-                if git rev-parse HEAD^ >/dev/null 2>&1; then
-                  CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
-                else
-                  CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
-                fi
-                if echo "$CHANGED_FILES" | grep -q '^docs/ArchitectureDriver/'; then
+                if echo "${CHANGED_FILES}" | grep -q '^docs/ArchitectureDriver/'; then
                   echo "Creating AD_index.md"
                   echo "# Architecture Driver Index" > docs/AD_index.md
                   for file in docs/ArchitectureDriver/*.md; do
                     echo "- [$(basename $file)]($file)" >> docs/AD_index.md
                   done
                 fi
-                if echo "$CHANGED_FILES" | grep -q '^docs/TopLevelRequirements/'; then
+                if echo "${CHANGED_FILES}" | grep -q '^docs/TopLevelRequirements/'; then
                   echo "Creating TLR_index.md"
                   echo "# Top Level Requirements Index" > docs/TLR_index.md
                   for file in docs/TopLevelRequirements/*.md; do
