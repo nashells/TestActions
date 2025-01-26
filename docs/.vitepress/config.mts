@@ -45,20 +45,20 @@ export default defineConfig({
               return tokens;
             },
           },
-          searchOptions: {
-            processTerm: (term) => {
-              if (typeof term === 'string') term = term.toLowerCase();
-              // @ts-ignore
-              const segmenter = Intl.Segmenter && new Intl.Segmenter("ja-JP", { granularity: "word" });
-              if (!segmenter) return term;
-              const tokens = [];
-              for (const seg of segmenter.segment(term)) {
-                // @ts-ignore
-                tokens.push(seg.segment);
-              }
-              return tokens;
-            },
-          },
+          // searchOptions: {
+          //   processTerm: (term) => {
+          //     if (typeof term === 'string') term = term.toLowerCase();
+          //     // @ts-ignore
+          //     const segmenter = Intl.Segmenter && new Intl.Segmenter("ja-JP", { granularity: "word" });
+          //     if (!segmenter) return term;
+          //     const tokens = [];
+          //     for (const seg of segmenter.segment(term)) {
+          //       // @ts-ignore
+          //       tokens.push(seg.segment);
+          //     }
+          //     return tokens;
+          //   },
+          // },
         },
       },
     },
