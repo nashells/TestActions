@@ -40,7 +40,7 @@ export default defineConfig({
               const tokens = [];
               for (const seg of segmenter.segment(term)) {
                 // @ts-ignore
-                tokens.push(seg.segment);
+                if (seg.segment.trim() !== '') tokens.push(seg.segment);
               }
               return tokens;
             },
