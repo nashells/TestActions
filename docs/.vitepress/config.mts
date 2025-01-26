@@ -46,7 +46,6 @@ export default defineConfig({
             },
           },
           searchOptions: {
-            combineWith: 'AND', // important for search chinese
             processTerm: (term) => {
               if (typeof term === 'string') term = term.toLowerCase();
               // @ts-ignore
