@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: '/TestActions/',
+  ignoreDeadLinks: true,
   title: "Test for GitHub Pages",
   description: "A VitePress Site",
   themeConfig: {
@@ -27,7 +28,40 @@ export default defineConfig({
     ],
 
     search: {
-      provider: 'local'
-    }
+      provider: 'local',
+      options: {
+        miniSearch: {
+          options: {
+            tokenize: (term) => {
+              if (typeof term === 'string') term = term.toLowerCase();
+              const segmenter = Intl.Segmenter && new Intl.Segmenter("ja-JP", { granularity: "word" });
+              if (!segmenter) return [term];
+              const tokens = [];
+              for (const seg of segmenter.segment(term)) {
+                // @ts-ignore
+                // ignore spaces
+                if (seg.segment.trim() !== '') tokens.push(seg.segment);
+              }
+              return tokens;
+            },
+          },
+          // searchOptions: {
+          //   combineWith: "AND",
+          //   processTerm: (term) => {
+          //     if (typeof term === 'string') term = term.toLowerCase();
+          //     // @ts-ignore
+          //     const segmenter = Intl.Segmenter && new Intl.Segmenter("ja-JP", { granularity: "word" });
+          //     if (!segmenter) return term;
+          //     const tokens = [];
+          //     for (const seg of segmenter.segment(term)) {
+          //       // @ts-ignore
+          //       tokens.push(seg.segment);
+          //     }
+          //     return tokens;
+          //   },
+          // },
+        },
+      },
+    },
   }
 })
