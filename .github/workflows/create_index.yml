@@ -28,32 +28,33 @@ jobs:
                 python-version: '3.x'
             
             - name: Changed files
-              id: chenged-files
+              id: changed-files
               uses: tj-actions/changed-files@v45
 
-            - name: Create index file
+            - name: Create index files
               env: 
-                CHANGED_FILES: ${{ steps.chenged-files.outputs.all_changed_files}}
+                CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
                 GH_TOKEN: ${{ github.token }}
               run: |
                 git config --global user.name "github-actions[bot]"
                 git config --global user.email "github-actions[bot]@users.noreply.github.com"
-                if echo "${CHANGED_FILES}" | grep -q '^docs/ArchitectureDriver/'; then
-                  echo "Creating AD_index.md"
-                  echo "# Architecture Driver Index" > docs/AD_index.md
-                  for file in docs/ArchitectureDriver/*.md; do
-                    echo "- [$(basename $file)]($file)" >> docs/AD_index.md
-                  done
-                  git add docs/AD_index.md
-                fi
-                if echo "${CHANGED_FILES}" | grep -q '^docs/TopLevelRequirements/'; then
-                  echo "Creating TLR_index.md"
-                  echo "# Top Level Requirements Index" > docs/TLR_index.md
-                  for file in docs/TopLevelRequirements/*.md; do
-                    echo "- [$(basename $file)]($file)" >> docs/TLR_index.md
-                  done
-                  git add docs/TLR_index.md
-                fi
+
+                create_index() {
+                  local dir=$1
+                  local index_file=$2
+                  if echo "${CHANGED_FILES}" | grep -q "^${dir}/"; then
+                    echo "Creating ${index_file}"
+                    echo "# ${index_file%_index.md} Index" > ${index_file}
+                    for file in ${dir}/*.md; do
+                      echo "- [$(basename $file)]($file)" >> ${index_file}
+                    done
+                    git add ${index_file}
+                  fi
+                }
+
+                create_index "docs/ArchitectureDriver" "docs/AD_index.md"
+                create_index "docs/TopLevelRequirements" "docs/TLR_index.md"
+
                 git commit -m "Update index files" || true
                 git push origin main
 
