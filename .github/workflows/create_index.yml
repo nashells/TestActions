@@ -42,6 +42,7 @@ jobs:
                 create_index() {
                   local dir=$1
                   local index_file=$2
+                  echo ${CHANGED_FILES}
                   if echo "${CHANGED_FILES}" | grep -q "^${dir}/"; then
                     echo "Creating ${index_file}"
                     echo "# ${index_file%_index.md} Index" > ${index_file}
