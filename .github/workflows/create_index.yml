@@ -42,10 +42,11 @@ jobs:
                 create_index() {
                   local dir=$1
                   local index_file=$2
+                  local category=$3
                   echo ${CHANGED_FILES}
                   if echo "${CHANGED_FILES}" | grep -q "^${dir}/"; then
                     echo "Creating ${index_file}"
-                    echo "# ${dir#docs/} Index" > ${index_file}
+                    echo "# ${category} Index" > ${index_file}
                     for file in ${dir}/*.md; do
                       echo "- [$(basename $file)]($file)" >> ${index_file}
                     done
@@ -53,8 +54,8 @@ jobs:
                   fi
                 }
 
-                create_index "docs/ArchitectureDriver" "docs/AD_index.md"
-                create_index "docs/TopLevelRequirements" "docs/TLR_index.md"
+                create_index "docs/ArchitectureDriver" "docs/AD_index.md" "アーキテクチャドライバー"
+                create_index "docs/TopLevelRequirements" "docs/TLR_index.md" "トップレベル要求"
 
                 git commit -m "Update index files" || true
                 git push origin main
