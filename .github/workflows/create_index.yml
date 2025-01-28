@@ -45,7 +45,7 @@ jobs:
                   echo ${CHANGED_FILES}
                   if echo "${CHANGED_FILES}" | grep -q "^${dir}/"; then
                     echo "Creating ${index_file}"
-                    echo "# ${dir%docs/} Index" > ${index_file}
+                    echo "# ${dir%_docs/} Index" > ${index_file}
                     for file in ${dir}/*.md; do
                       echo "- [$(basename $file)]($file)" >> ${index_file}
                     done
