@@ -14,11 +14,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   
-  # start after Create index file workflow completes
-  workflow_run:
-    workflows: ["Create index file"]
-    types:
-      - completed
+  workflow_call:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

@@ -62,6 +62,10 @@ jobs:
                 git commit -m "Update index files" || true
                 git push origin main
 
+    call-workflow:
+      needs: create-index
+      uses: ./.github/workflows/deploy.yml
+
 
 
 
