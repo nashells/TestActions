@@ -48,7 +48,9 @@ jobs:
                     echo "Creating ${index_file}"
                     echo "# ${category} Index" > ${index_file}
                     for file in ${dir}/*.md; do
-                      echo "- [$(basename $file)]($file)" >> ${index_file}
+                      if [ "$(basename $file)" != "index.md" ]; then
+                        echo "- [$(basename $file)]($file)" >> ${index_file}
+                      fi
                     done
                     git add ${index_file}
                   fi
