@@ -1,6 +1,7 @@
 import { withMermaid } from "vitepress-plugin-mermaid"
 import { generateSidebar } from 'vitepress-sidebar'
 
+
 // https://vitepress.dev/reference/site-config
 export default withMermaid({
   ignoreDeadLinks: true,
