@@ -48,8 +48,8 @@ jobs:
                   local dir=$1
                   local index_file=$2
                   local category=$3
-                  echo ${CHANGED_FILES}
-                  if echo "${CHANGED_FILES}" | grep -q "^${dir}/"; then
+                  echo ${CHANGED_FILES} > changed_files.txt
+                  if grep -q "^${dir}/" changed_files.txt; then
                     echo "Creating ${index_file}"
                     echo "# ${category} Index" > ${index_file}
                     for file in ${dir}/*.md; do
