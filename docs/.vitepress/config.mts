@@ -70,4 +70,3 @@ export default defineConfig({
   //   class: "mermaid my-class", // set additional css classes for parent container 
   // },
 })
-
