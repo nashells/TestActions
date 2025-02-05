@@ -1,9 +1,11 @@
-import { defineConfig } from "vitepress"
+// import { defineConfig } from "vitepress"
+import { withMermaid } from "vitepress-plugin-mermaid"
 import { generateSidebar } from "vitepress-sidebar"
 // import { withMermaid } from "vitepress-plugin-mermaid"
 // import csp from 'vite-plugin-csp'
 
-export default defineConfig({
+// export default defineConfig({
+export default withMermaid({
   base: '/TestActions/',
   ignoreDeadLinks: true,
   title: "Test for GitHub Pages",
@@ -27,6 +29,16 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ],
+    
+    // your existing vitepress config...
+    // optionally, you can pass MermaidConfig
+    mermaid: {
+      // refer https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
+    },
+    // optionally set additional config for plugin itself with MermaidPluginConfig
+    mermaidPlugin: {
+      class: "mermaid my-class", // set additional css classes for parent container 
+    },
     
     search: {
       provider: 'local',
