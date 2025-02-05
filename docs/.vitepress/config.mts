@@ -1,6 +1,8 @@
 import { defineConfig } from "vitepress"
 import { generateSidebar } from "vitepress-sidebar"
 // import { withMermaid } from "vitepress-plugin-mermaid"
+// import csp from 'vite-plugin-csp'
+
 export default defineConfig({
   ignoreDeadLinks: true,
   title: "Test for GitHub Pages",
@@ -24,7 +26,7 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ],
-
+    
     search: {
       provider: 'local',
       options: {
@@ -62,6 +64,17 @@ export default defineConfig({
       },
     },
   },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          format: 'es',
+          sourcemap: false,
+        },
+      },
+    },
+  }
+
   // mermaid: {
   //   // refer https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
   // },
