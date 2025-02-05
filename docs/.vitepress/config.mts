@@ -4,6 +4,7 @@ import { generateSidebar } from "vitepress-sidebar"
 // import csp from 'vite-plugin-csp'
 
 export default defineConfig({
+  base: '/TestActions/',
   ignoreDeadLinks: true,
   title: "Test for GitHub Pages",
   description: "A VitePress Site",
