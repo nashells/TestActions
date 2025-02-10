@@ -7,7 +7,7 @@ on:
     workflow_dispatch:
     push:
         branches:
-            - ${BRANCH}
+            - main
         paths:
             - docs/ArchitectureDriver/*.md
             - docs/TopLevelRequirements/*.md
