@@ -68,7 +68,8 @@ jobs:
                 create_index "docs/TopLevelRequirements" "docs/TLR_index.md" "トップレベル要求"
 
                 git commit -m "Update index files" || true
-                git push origin ${BRANCH} 
+                echo "BRANCH: ${BRANCH}"
+                git push origin main 
 
     call-workflow:
       needs: create-index
