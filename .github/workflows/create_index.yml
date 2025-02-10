@@ -1,10 +1,13 @@
 name: Create index file
 
+env: 
+  BRANCH: main
+
 on:
     workflow_dispatch:
     push:
         branches:
-            - main
+            - ${BRANCH}
         paths:
             - docs/ArchitectureDriver/*.md
             - docs/TopLevelRequirements/*.md
@@ -65,7 +68,7 @@ jobs:
                 create_index "docs/TopLevelRequirements" "docs/TLR_index.md" "トップレベル要求"
 
                 git commit -m "Update index files" || true
-                git push origin main
+                git push origin ${BRANCH} 
 
     call-workflow:
       needs: create-index
